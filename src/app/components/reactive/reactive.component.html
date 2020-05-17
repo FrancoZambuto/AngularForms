@@ -1,0 +1,153 @@
+<h4>Forms <small> Reactive </small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="Save()">
+
+  <div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Name</label>
+      <div class="col">
+
+        <input class="form-control"
+               type="text"
+               placeholder="Name"
+               formControlName="name"
+               [class.is-invalid]="validName">
+               <small *ngIf="validName" class="form-text text-danger">Name required </small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Last Name</label>
+      <div class="col">
+
+        <input class="form-control"
+               type="text"
+               placeholder="Last Name"
+               formControlName="lastName"
+               [class.is-invalid]="validLastName">
+               <small *ngIf="validLastName" class="form-text text-danger">Last name required </small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Email</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="email"
+             placeholder="Email"
+             formControlName="email"
+             [class.is-invalid]="validEmail">
+             <small *ngIf="validEmail" class="form-text text-danger">Email required </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">User name</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="text"
+             placeholder="User name"
+             formControlName="userName"
+             [class.is-invalid]="validUserName">
+             <small *ngIf="validUserName" class="form-text text-danger">User name taken, choose other please </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Password</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="password"
+             placeholder="Password"
+             formControlName="password1"
+             [class.is-invalid]="validPassword1">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Repeat password</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="password"
+             placeholder="Repeat password"
+             formControlName="password2"
+             [class.is-invalid]="validPassword2">
+    </div>
+  </div>
+  
+  <div class="form-group row" formGroupName="address">
+    <label class="col-2 col-form-label">Address</label>
+    <div class="form-row col">
+      <div class="col">
+        <input type="text"
+        class="form-control"
+        placeholder="Distric"
+        formControlName="distric"
+        [class.is-invalid]="validDistric">
+        <small *ngIf="validDistric" class="form-text text-danger">Distric required </small>
+      </div>
+      <div class="col">
+        <input type="text"
+        class="form-control"
+        placeholder="City"
+        formControlName="city"
+        [class.is-invalid]="validCity">
+        <small *ngIf="validCity" class="form-text text-danger">City required </small>
+      </div>
+    </div>  
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Hobby</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+          <tbody formArrayName="hobby">
+            <tr *ngFor="let control of hobbies.controls; let i = index">
+              <td>{{i+1}}</td>
+              <td>
+                <input class="form-control" 
+                       type="text"
+                       [formControlName]="i">
+              </td>
+              <td>
+                <button class="btn btn-danger"
+                        type="button"
+                        (click)="DeleteHobby(i)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+      <button class="btn btn-primary mt-3 mb-5 btn-block"
+              type="button"
+              (click)="addHobby()">
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Save
+      </button>
+    </div>
+  </div>
+
+</form>
